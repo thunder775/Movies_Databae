@@ -15,7 +15,7 @@ class DetailsPage extends React.Component {
 
     async getMovieData() {
         console.log("started");
-        await fetch('https://api.themoviedb.org/3/movie/' + this.props.match.params.id + '?api_key=9b153f4e40437e115298166e6c1b997c')
+        fetch('https://api.themoviedb.org/3/movie/' + this.props.match.params.id + '?api_key=9b153f4e40437e115298166e6c1b997c')
             .then(async (response) => {
                 let data = await response.json();
                 console.log(data);
@@ -28,7 +28,7 @@ class DetailsPage extends React.Component {
 
     render() {
         if (this.state.movie === null) {
-            return <div><p>Loading</p></div>
+            return <div className={"main-page"}><p className={"loading-text"}>loading</p></div>;
         } else {
             return (
                 <div className={"details-page"}

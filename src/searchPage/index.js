@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import Card from "../MovieCard";
-import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 export default function SearchPage(props) {
     let [path, setPath] = useState('/search');

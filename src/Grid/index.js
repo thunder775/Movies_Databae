@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../MovieCard";
 import './styles.css';
-import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 
 class Grid extends React.Component {
@@ -15,7 +15,7 @@ class Grid extends React.Component {
 
     async getMoviesData() {
         console.log("started");
-        await fetch(this.state.link)
+        fetch(this.state.link)
             .then(async (response) => {
                 let data = await response.json();
                 console.log(data["results"]);
@@ -32,7 +32,7 @@ class Grid extends React.Component {
 
     render() {
         if (this.state.moviesList.length === 0) {
-            return <div><p>loading</p></div>;
+            return <div className={"main-page"}><p className={"loading-text"}>loading</p></div>;
         } else {
             return (
                 <div className={"main-page"}>
@@ -40,14 +40,10 @@ class Grid extends React.Component {
                         <button className={"search-button"}>Search</button>
                     </Link>
                     <div className={"movies-grid"}>
-
                         {
                             this.state.moviesList.map((element) => {
-                                return <Card id={element["id"]}
-                                             url={"https://image.tmdb.org/t/p/original" + element["poster_path"]}
-                                             title={element["original_title"]}
-                                             genres={element["overview"].substring(0, 100)}
-                                             contentRating={element["vote_average"]}
+                                return <Card
+                                    cardDetails={element}
                                 />
                             })
                         }
