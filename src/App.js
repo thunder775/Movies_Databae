@@ -15,6 +15,7 @@ function App() {
                 <Route path={"/details/:id"} component={DetailsPage}/>
                 <Route exact path={"/search"} component={SearchPage}/>
                 <Route path={"/search/:query"} component={Grid}/>
+                <Route path={"/:pageNumber"} component={Grid}/>
                 <Route path={""} component={Grid}/>
             </Switch>
         </Router>

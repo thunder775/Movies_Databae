@@ -8,14 +8,15 @@ class Grid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: this.props.match.params.query === undefined ? 'https://api.themoviedb.org/3/discover/movie?api_key=9b153f4e40437e115298166e6c1b997c' : `https://api.themoviedb.org/3/search/movie?query=${this.props.match.params.query}&api_key=9b153f4e40437e115298166e6c1b997c`,
-            moviesList: []
+            pageNumber: 1,
+            moviesList: [],
         }
     }
 
-    async getMoviesData() {
+    async getMoviesData(pageNumber) {
         console.log("started");
-        fetch(this.state.link)
+        fetch(this.props.match.params.query === undefined ? 'https://api.themoviedb.org/3/discover/movie?api_key=9b153f4e40437e115298166e6c1b997c&page=' + pageNumber : `https://api.themoviedb.org/3/search/movie?query=${this.props.match.params.query}&api_key=9b153f4e40437e115298166e6c1b997c`,
+        )
             .then(async (response) => {
                 let data = await response.json();
                 console.log(data["results"]);
@@ -27,15 +28,20 @@ class Grid extends React.Component {
     }
 
     componentDidMount() {
-        this.getMoviesData()
+
+        this.getMoviesData(this.state.pageNumber)
+    }
+
+    getLink() {
+        this.setState({});
     }
 
     render() {
         if (this.state.moviesList.length === 0) {
-            return <div className={"main-page"}><p className={"loading-text"}>loading</p></div>;
+            return <div className={"main-page-loading"}><p className={"loading-text"}>loading</p></div>;
         } else {
             return (
-                <div className={"main-page"}>
+                <div key={JSON.stringify(this.state.moviesList)} className={"main-page"}>
                     <Link to={'/search'}>
                         <button className={"search-button"}>Search</button>
                     </Link>
@@ -47,6 +53,28 @@ class Grid extends React.Component {
                                 />
                             })
                         }
+                    </div>
+                    <div className={'footer'}>
+                        {this.state.pageNumber > 1 && <Link to={`/${this.state.pageNumber - 1}`} onClick={async () => {
+                            this.setState({
+                                pageNumber: this.state.pageNumber - 1
+                            });
+                            await this.getMoviesData(this.state.pageNumber - 1);
+                        }}>
+                            <button className={'previous'}>
+                                Previous
+                            </button>
+                        </Link>}
+                        <Link to={`/${this.state.pageNumber + 1}`} onClick={async () => {
+                            this.setState({
+                                pageNumber: this.state.pageNumber + 1
+                            });
+                            await this.getMoviesData(this.state.pageNumber + 1);
+                        }}>
+                            <button className={'next'}>
+                                Next
+                            </button>
+                        </Link>
                     </div>
                 </div>
             )

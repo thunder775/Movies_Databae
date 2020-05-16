@@ -9,7 +9,6 @@
     display: flex;
     width: 250px;
     height: 380px;
-    background-color: #61dafb;
     margin: 10px;
 }
 .content-rating{
@@ -25,11 +24,11 @@
     justify-content: space-between;
     align-items: center;
 }
-.details {border-radius: 5px;
+.details {
+    border-radius: 5px;
     position: absolute;
     bottom:0;
     width: 100%;
-
     display: none;
     background-color: white;
 }

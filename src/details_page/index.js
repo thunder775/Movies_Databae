@@ -28,7 +28,7 @@ class DetailsPage extends React.Component {
 
     render() {
         if (this.state.movie === null) {
-            return <div className={"main-page"}><p className={"loading-text"}>loading</p></div>;
+            return <div className={"main-page-loading"}><p className={"loading-text"}>loading</p></div>;
         } else {
             return (
                 <div className={"details-page"}
