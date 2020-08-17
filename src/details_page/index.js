@@ -58,8 +58,9 @@ class DetailsPage extends React.Component {
                             <p className={"details-overview"}>{this.state.movie.overview}</p>
                         </div>
                     </div>
-                    {this.state.playVid && <div className={"youtube-overlay"} onClick={()=>this.closeYoutube()}/>}
-                    {this.state.playVid && <YouTube id={`${this.state.movie.videos.results[0].key}`}/>}
+                    {this.state.playVid && <div className={"youtube-overlay"} onClick={() => this.closeYoutube()}/>}
+                    {this.state.playVid &&
+                    <YouTube title={this.state.movie.original_title} id={`${this.state.movie.videos.results[0].key}`}/>}
                 </div>
             );
         }
@@ -69,16 +70,16 @@ class DetailsPage extends React.Component {
 function YouTube(props) {
     return (
         <div className={"youtube-popup"}>
-            <iframe
-                style={{
-                    position: "absolute",
-                    top: "25%",
-                    left: "25%",
-                    width: "50%",
-                    height: "50%"
-                }}
-                src={`https://www.youtube.com/embed/${props.id}`}
-                frameBorder="0"
+            <iframe title={props.title}
+                    style={{
+                        position: "absolute",
+                        top: "25%",
+                        left: "25%",
+                        width: "50%",
+                        height: "50%"
+                    }}
+                    src={`https://www.youtube.com/embed/${props.id}`}
+                    frameBorder="0"
             />
         </div>
     );

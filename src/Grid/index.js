@@ -1,7 +1,7 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Card from "../MovieCard";
 import './styles.css';
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import SearchPage from "../searchPage";
 
 function Grid(props) {

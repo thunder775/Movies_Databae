@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import Grid from './Grid'
 import './App.css';
-import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import DetailsPage from "./details_page";
-import SearchPage from "./searchPage";
 
 
 function App() {
