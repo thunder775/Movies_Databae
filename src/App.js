@@ -12,7 +12,7 @@ function App() {
                 {/*<Route path={"/search"} component={SearchPage}/>*/}
                 <Route path={"/details/:id"} component={DetailsPage}/>
                 <Route path={"/search/:query"} component={Grid}/>
-                <Route path={"/:pageNumber"} component={Grid}/>
+                <Route path={"/page/:pageNumber"} component={Grid}/>
                 <Route path={""} component={Grid}/>
             </Switch>
         </Router>

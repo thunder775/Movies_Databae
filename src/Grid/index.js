@@ -5,13 +5,10 @@ import {Link} from "react-router-dom";
 import SearchPage from "../searchPage";
 
 function Grid(props) {
-    let pageNumber = props.match.params.pageNumber === undefined ? 1 : props.match.params.pageNumber;
     let [moviesList, setMoviesList] = useState([]);
 
     async function getMoviesData(pageNumber) {
-        console.log('------------------------')
-        console.log(JSON.stringify(props));
-        console.log("started");
+        console.log("from getmovies-----" + pageNumber);
         fetch(props.match.params.query === undefined ? 'https://api.themoviedb.org/3/discover/movie?api_key=9b153f4e40437e115298166e6c1b997c&page=' + pageNumber : `https://api.themoviedb.org/3/search/movie?query=${props.match.params.query}&api_key=9b153f4e40437e115298166e6c1b997c`,
         )
             .then(async (response) => {
@@ -20,7 +17,16 @@ function Grid(props) {
             });
     }
 
+
+       let  pageNumber = props.match.params.pageNumber === undefined ? 1 : props.match.params.pageNumber;
+        if (isNaN(Number(pageNumber))) {
+            pageNumber = 1;
+        } else {
+            pageNumber = Number(pageNumber);
+        }
+
     useEffect(() => {
+        console.log(props.match.params)
         getMoviesData(props.match.params.pageNumber === undefined ? 1 : props.match.params.pageNumber)
     },)
 
@@ -45,10 +51,10 @@ function Grid(props) {
                     }
                 </div>
                 <div className={'footer'}>
-                    <Link to={`/${Number(pageNumber) + 1}`}>
+                    <Link to={`/page/${Number(pageNumber + 1)}`}>
                         <i className="fa fa-angle-double-right search-button"/>
                     </Link>
-                    {pageNumber > 1 && <Link to={`/${pageNumber - 1}`}>
+                    {pageNumber > 1 && <Link to={`/page/${pageNumber - 1}`}>
                         <i className="fa fa-angle-double-left search-button"/>
                     </Link>}
                     <div className={"credits-section"}>
